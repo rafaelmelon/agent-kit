@@ -13,6 +13,26 @@ A portable tooling layer — not a deployable app. It provides:
 
 Project knowledge (specs, docs, architecture decisions) lives in each project repo.
 
+## Setup
+
+### 0. Environment variables (one time)
+
+Copy `.env.example` to `.env.local` and fill in your tokens:
+
+```bash
+cp .env.example .env.local
+```
+
+Then register the Supabase token with Claude Code:
+
+```bash
+claude mcp add supabase --env SUPABASE_ACCESS_TOKEN=<your-token>
+```
+
+Tokens needed:
+- **Supabase PAT** → supabase.com → Account → Access Tokens
+- **GitHub token** → github.com → Settings → Developer settings → Personal access tokens (scopes: `repo`, `read:org`)
+
 ## Quick start
 
 ### 1. Add to workspace
