@@ -10,6 +10,10 @@
     "playwright": {
       "command": "npx",
       "args": ["@playwright/mcp@latest", "--viewport-size=1280x720"]
+    },
+    "posthog": {
+      "type": "http",
+      "url": "https://mcp.posthog.com/mcp"
     }
   }
 }
