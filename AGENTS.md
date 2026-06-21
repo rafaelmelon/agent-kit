@@ -1,81 +1,108 @@
 # rafaelmelon-ai
 
-## What this repository is
+## What This Repository Is
 
-This is a **personal AI tooling hub** — not a deployable application, not a knowledge base for specific projects, but a **portable tooling layer** that Rafael Melón uses when working with Claude Code across all personal projects.
+This is a **personal AI tooling hub**: not a deployable application, not a
+project knowledge base, but a portable workflow layer for Rafael Melon across
+AI coding agents.
+
+The repository is designed around a provider-neutral core plus thin adapters for
+specific tools. The neutral contract lives in Markdown so it can be read by
+Cursor, Claude Code, Codex, Copilot, Windsurf, or any other capable coding
+agent.
 
 It provides:
 
-- **Workflow commands** — slash commands that guide common development tasks (planning from a GitHub Issue, reviewing a PR, etc.)
-- **Tooling skills** — reusable skill definitions for GitHub, Vercel, Supabase, and other services
-- **Sub-agent roles** — specialized AI behavior templates (PM, Plan, Build, Review)
-- **Canonical rules** — conventions applied consistently across all projects
+- **Workflow commands**: reusable prompts for planning from a GitHub Issue,
+  reviewing a PR, and syncing a project spec.
+- **Tooling skills**: operational notes for GitHub, Vercel, Supabase, browser
+  automation, and other external services.
+- **Agent roles**: reusable behavior templates for PM, Plan, Build, Review,
+  Spec Divergence, and Design to Code work.
+- **Canonical rules**: conventions applied consistently across personal
+  projects.
+- **Tool adapters**: native files for agents that support their own rule,
+  command, MCP, or skill formats.
 
-**Project-specific knowledge lives in each project repo** (`docs/`, `SPEC.md`, etc.). This repo is tooling only.
+Project-specific knowledge lives in each project repo (`docs/`, `SPEC.md`,
+`AGENTS.md`, architecture docs, etc.). This repo is tooling only.
 
-## Repository structure
+## Repository Structure
 
 ```text
 rafaelmelon-ai/
-├── CLAUDE.md               # AI behavioral rules (main guide)
-├── AGENTS.md               # This file — repository identity for AI context
-├── SPEC.md                 # Canonical rules (R1–Rn)
-├── CONTRIBUTING.md         # Human governance & git workflow
+├── AGENTS.md               # Provider-neutral identity and operating contract
+├── SPEC.md                 # Canonical rules (R1-Rn)
+├── CLAUDE.md               # Claude Code compatibility shim
+├── CONTRIBUTING.md         # Human governance and git workflow
+├── .mcp.json               # Shared MCP config for tools that support it
 │
-├── .claude/
-│   ├── commands/           # Slash commands (workflow helpers)
-│   │   ├── plan-issue.md   # Plan implementation from a GitHub Issue
-│   │   ├── update-spec.md  # Sync project spec after a feature
-│   │   └── review-pr.md    # Review a PR against spec and ACs
-│   │
-│   ├── skills/             # Tooling skills (external service access)
-│   │   ├── github/         # GitHub Issues, PRs, Actions
-│   │   ├── vercel/         # Deploy status, logs, env vars
-│   │   ├── supabase/       # Database queries, migrations
-│   │   └── browser-automation/  # Playwright for UI testing
-│   │
-│   └── sub-agents/         # Specialized AI role templates
-│       ├── pm-agent.md
-│       ├── plan-agent.md
-│       ├── build-agent.md
-│       └── review-agent.md
+├── .cursor/                # Cursor adapter
+│   ├── commands/           # Cursor custom slash commands
+│   ├── rules/              # Cursor project rules (.mdc)
+│   └── mcp.json            # Cursor MCP configuration
+│
+├── .claude/                # Claude Code adapter
+│   ├── commands/           # Claude slash commands
+│   ├── skills/             # Claude-compatible skill definitions
+│   └── sub-agents/         # Claude-oriented role templates
 │
 └── docs/
-    └── workflow.md         # How to use this toolkit
+    ├── adapters.md         # How to add or maintain adapters
+    ├── codex.md            # Codex-specific setup
+    ├── cursor.md           # Cursor-specific setup
+    └── workflow.md         # Standard development workflow
 ```
 
-## Canonical sources of truth
+## Canonical Sources
 
 | What | Where |
 | ---- | ----- |
-| AI behavioral rules | `CLAUDE.md` |
+| Repository identity and default agent behavior | `AGENTS.md` |
 | Canonical rule set | `SPEC.md` |
-| Workflow commands | `.claude/commands/` |
-| Tooling skills | `.claude/skills/` |
-| Sub-agent roles | `.claude/sub-agents/` |
-| Project knowledge | Each project's `docs/` or `SPEC.md` |
-| Planning & tasks | GitHub Issues (per-project repo) |
+| Standard workflow | `docs/workflow.md` |
+| Shared MCP config | `.mcp.json` |
+| Codex guidance | `AGENTS.md` and `docs/codex.md` |
+| Cursor adapter | `.cursor/` |
+| Claude Code adapter | `.claude/` and `CLAUDE.md` |
+| Project knowledge | Each project's `AGENTS.md`, `docs/`, or `SPEC.md` |
+| Planning and tasks | GitHub Issues in each project repo |
 
-## How to use
+## How To Use
 
-Add this repo alongside project repos in a multi-root workspace. Claude Code picks up `CLAUDE.md` automatically and applies all rules and skills when working in any repo in the workspace.
+Use `AGENTS.md` and `SPEC.md` as the neutral source of truth. Tool-specific
+files should adapt those instructions to a particular agent without changing the
+workflow contract.
 
-```json
-{
-  "folders": [
-    { "path": "rafaelmelon-ai" },
-    { "path": "movie-recommender" }
-  ]
-}
-```
+For Cursor, use `.cursor/rules`, `.cursor/commands`, and `.cursor/mcp.json`.
+See `docs/cursor.md`.
 
-## Adding new tools
+For Codex, use `AGENTS.md` as the primary contract and see `docs/codex.md` for
+workflow prompts that do not depend on slash commands.
 
-- New slash command → `.claude/commands/<name>.md`
-- New skill → `.claude/skills/<name>/SKILL.md`
-- New sub-agent → `.claude/sub-agents/<name>.md`
-- New rule → add a section to `SPEC.md`
+For Claude Code, keep `CLAUDE.md` as a small compatibility shim and keep the
+Claude-specific command, skill, and sub-agent files under `.claude/`.
 
-## Document precedence
+For other AI tools, start from `AGENTS.md`, `SPEC.md`, and `docs/workflow.md`,
+then add the smallest possible adapter for that tool's native format.
 
-When sources conflict: `SPEC.md` > `docs/` > project docs > source code.
+## Adding New Tools
+
+- New neutral rule: add a section to `SPEC.md`.
+- New workflow: document it in `docs/workflow.md`, then add adapter commands.
+- New Codex guidance: `AGENTS.md` or `docs/codex.md`.
+- New Cursor command: `.cursor/commands/<name>.md`.
+- New Cursor rule: `.cursor/rules/<name>.mdc`.
+- New Claude command: `.claude/commands/<name>.md`.
+- New Claude skill: `.claude/skills/<name>/SKILL.md`.
+- New Claude sub-agent: `.claude/sub-agents/<name>.md`.
+
+## Document Precedence
+
+When sources conflict:
+
+1. Project-specific user instructions in the current chat.
+2. Project repo instructions (`AGENTS.md`, project `SPEC.md`, project docs).
+3. This toolkit's `SPEC.md`.
+4. This toolkit's adapter files (`.cursor/`, `.claude/`).
+5. Source code and tests.

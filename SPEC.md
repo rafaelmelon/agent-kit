@@ -1,6 +1,8 @@
 # SPEC — Canonical Rules
 
-This file is the authoritative rule set for all personal projects. All AI agents, commands, and workflows defer to it.
+This file is the authoritative rule set for all personal projects. All AI
+agents, commands, and workflows defer to it unless a project repo defines a
+more specific instruction.
 
 ## R1 — File conventions
 
@@ -61,4 +63,17 @@ This file is the authoritative rule set for all personal projects. All AI agents
 | R6.3 | Before implementing, confirm the plan is aligned with the GitHub Issue. |
 | R6.4 | After implementation, always run: type check (`tsc --noEmit`), lint, tests (if they exist). |
 | R6.5 | Flag spec drift: if code diverges from the project spec, report it and propose an update. |
-| R6.6 | Use the appropriate sub-agent for each workflow step. |
+| R6.6 | Use the appropriate role for each workflow step: PM, Plan, Build, Review, or Spec Divergence. |
+| R6.7 | Prefer provider-neutral instructions first (`AGENTS.md`, `SPEC.md`, `docs/`). Tool-specific adapters must not become the only source of truth. |
+| R6.8 | Keep Cursor, Codex, and Claude compatibility in sync when adding or changing core workflows. |
+
+## R7 — AI toolkit compatibility
+
+| ID | Rule |
+|----|------|
+| R7.1 | `AGENTS.md` is the neutral entrypoint for Codex and any agent that supports plain Markdown instructions. |
+| R7.2 | Cursor-native rules live in `.cursor/rules/*.mdc`; keep them concise and reference the neutral docs instead of duplicating everything. |
+| R7.3 | Cursor-native commands live in `.cursor/commands/*.md`; Claude-native commands live in `.claude/commands/*.md`. Commands with the same name should describe the same workflow. |
+| R7.4 | Claude-specific behavior belongs in `CLAUDE.md` or `.claude/`; Cursor-specific behavior belongs in `.cursor/`; Codex guidance belongs in `AGENTS.md` and `docs/codex.md`. |
+| R7.5 | MCP configuration should use environment variable placeholders and never hardcoded secrets. |
+| R7.6 | New adapters must be thin translations of the neutral workflow, not competing standards. |

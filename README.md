@@ -1,21 +1,27 @@
 # rafaelmelon-ai
 
-Personal AI tooling hub for working with Claude Code across personal projects.
+Personal AI tooling hub for coding agents across Rafael Melon's projects.
 
-## What this is
+## What This Is
 
-A portable tooling layer — not a deployable app. It provides:
+A portable tooling layer, not a deployable app. The neutral source of truth is
+plain Markdown (`AGENTS.md`, `SPEC.md`, `docs/`), with adapters for tools that
+support native rule or command formats.
 
-- **Slash commands** — `/plan-issue`, `/update-spec`, `/review-pr`
-- **Tooling skills** — GitHub, Vercel, Supabase, browser automation
-- **Sub-agents** — PM, Plan, Build, Review, Spec Divergence
-- **Canonical rules** — applied consistently across all projects
+It provides:
 
-Project knowledge (specs, docs, architecture decisions) lives in each project repo.
+- **Slash commands**: `/plan-issue`, `/update-spec`, `/review-pr`
+- **Tooling skills**: GitHub, Vercel, Supabase, browser automation
+- **Agent roles**: PM, Plan, Build, Review, Spec Divergence
+- **Canonical rules**: shared conventions applied across projects
+- **Adapters**: Codex, Cursor, and Claude Code today; more can be added later
+
+Project knowledge (specs, docs, architecture decisions) lives in each project
+repo.
 
 ## Setup
 
-### 0. Environment variables (one time)
+### 0. Environment Variables
 
 Copy `.env.example` to `.env.local` and fill in your tokens:
 
@@ -23,19 +29,25 @@ Copy `.env.example` to `.env.local` and fill in your tokens:
 cp .env.example .env.local
 ```
 
-Then register the Supabase token with Claude Code:
+Then register the Supabase token with the agents you use.
+
+Claude Code example:
 
 ```bash
 claude mcp add supabase --env SUPABASE_ACCESS_TOKEN=<your-token>
 ```
 
+Cursor and Codex can use MCP config files or their own connector settings. See
+`docs/cursor.md` and `docs/codex.md`.
+
 Tokens needed:
-- **Supabase PAT** → supabase.com → Account → Access Tokens
-- **GitHub token** → github.com → Settings → Developer settings → Personal access tokens (scopes: `repo`, `read:org`)
+- **Supabase PAT**: supabase.com -> Account -> Access Tokens
+- **GitHub token**: github.com -> Settings -> Developer settings -> Personal
+  access tokens (scopes: `repo`, `read:org`)
 
 ## Quick start
 
-### 1. Add to workspace
+### 1. Add To Workspace
 
 ```json
 // rafaelmelon.code-workspace
@@ -47,12 +59,21 @@ Tokens needed:
 }
 ```
 
-Claude Code picks up `CLAUDE.md` automatically.
+Any agent can read `AGENTS.md`, `SPEC.md`, and `docs/workflow.md` as the
+neutral contract.
 
-### 2. Workflow
+### 2. Tool Adapters
+
+- **Codex**: use `AGENTS.md` as the primary contract. See `docs/codex.md`.
+- **Cursor**: use `.cursor/rules`, `.cursor/commands`, and `.cursor/mcp.json`.
+  See `docs/cursor.md`.
+- **Claude Code**: use `CLAUDE.md` plus `.claude/commands`, `.claude/skills`,
+  and `.claude/sub-agents`.
+
+### 3. Workflow
 
 ```text
-GitHub Issue  →  /plan-issue <number>  →  implement  →  /update-spec
+GitHub Issue -> /plan-issue <number> -> implement -> /update-spec
 ```
 
 See [docs/workflow.md](docs/workflow.md) for the full guide.
@@ -61,10 +82,15 @@ See [docs/workflow.md](docs/workflow.md) for the full guide.
 
 ```text
 rafaelmelon-ai/
-├── CLAUDE.md               # AI behavioral rules
-├── AGENTS.md               # Repository identity
-├── SPEC.md                 # Canonical rules (R1–R6)
+├── AGENTS.md               # Provider-neutral agent instructions
+├── SPEC.md                 # Canonical rules (R1-R7)
+├── CLAUDE.md               # Claude Code compatibility shim
 ├── CONTRIBUTING.md         # Conventions for this repo
+├── .mcp.json               # Shared MCP config
+├── .cursor/
+│   ├── commands/           # Cursor custom commands
+│   ├── rules/              # Cursor project rules
+│   └── mcp.json            # Cursor MCP config
 ├── .claude/
 │   ├── commands/
 │   │   ├── plan-issue.md   # Plan from a GitHub Issue
@@ -82,6 +108,9 @@ rafaelmelon-ai/
 │       ├── review-agent.md
 │       └── spec-divergence-agent.md
 └── docs/
+    ├── adapters.md
+    ├── codex.md
+    ├── cursor.md
     └── workflow.md
 ```
 
@@ -89,7 +118,14 @@ rafaelmelon-ai/
 
 | What | Where |
 |------|-------|
-| New slash command | `.claude/commands/<name>.md` |
-| New skill | `.claude/skills/<name>/SKILL.md` |
-| New sub-agent | `.claude/sub-agents/<name>.md` |
-| New rule | Add section to `SPEC.md` |
+| New neutral rule | `SPEC.md` |
+| New neutral workflow | `docs/workflow.md` |
+| New Codex instruction | `AGENTS.md` or `docs/codex.md` |
+| New Cursor command | `.cursor/commands/<name>.md` |
+| New Cursor rule | `.cursor/rules/<name>.mdc` |
+| New Claude command | `.claude/commands/<name>.md` |
+| New Claude skill | `.claude/skills/<name>/SKILL.md` |
+| New Claude sub-agent | `.claude/sub-agents/<name>.md` |
+
+Keep adapter files thin. The workflow should remain understandable to an AI
+agent that only reads Markdown.
