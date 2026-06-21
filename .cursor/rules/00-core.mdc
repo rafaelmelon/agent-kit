@@ -1,0 +1,27 @@
+---
+description: Always apply the rafaelmelon-ai neutral toolkit contract.
+alwaysApply: true
+---
+
+# rafaelmelon-ai Core Contract
+
+This repo is a provider-neutral AI tooling hub. Use it as workflow guidance for
+personal projects, not as project-specific product knowledge.
+
+Read and follow:
+
+- `AGENTS.md` for repository identity and default agent behavior.
+- `SPEC.md` for canonical rules.
+- `docs/workflow.md` for the standard development cycle.
+- The active project repo's own `AGENTS.md`, `SPEC.md`, and docs when present.
+
+Project-specific instructions override this toolkit when they are more specific.
+
+Core behavior:
+
+- Keep scope minimal and tied to the user's request or confirmed plan.
+- Read relevant files before editing.
+- Never read `.env` files; use `.env.example` only.
+- Never commit secrets or credentials.
+- Never push, merge, close PRs, or deploy without explicit user confirmation.
+- After implementation, run type check, lint, and tests when available.

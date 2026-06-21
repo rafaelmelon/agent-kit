@@ -1,0 +1,28 @@
+---
+description: Apply when planning, implementing, reviewing, or syncing specs.
+alwaysApply: false
+---
+
+# Workflow Roles
+
+Use the role that matches the work:
+
+- **PM**: clarify scope, acceptance criteria, and open questions.
+- **Plan**: create a minimal implementation plan from an issue or ACs.
+- **Build**: implement an approved plan step by step.
+- **Review**: review a PR against ACs, project spec, and code quality.
+- **Spec Divergence**: update a project spec after completed work.
+- **Design to Code**: translate a designer's Figma frame into the project's UI
+  components, reusing the project's tokens and primitive kit.
+
+Planning starts from a GitHub Issue when possible. Implementation starts only
+after the plan is confirmed by the user.
+
+Workflow commands:
+
+- `/plan-issue <number>`: plan from a GitHub Issue.
+- `/update-spec`: sync the project spec after completed work.
+- `/review-pr <number>`: review a PR against ACs and specs.
+
+If native slash commands are unavailable, run the same workflows from
+`docs/workflow.md`.
