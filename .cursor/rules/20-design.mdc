@@ -1,0 +1,43 @@
+---
+description: Apply when implementing UI from a designer's Figma handoff.
+alwaysApply: false
+---
+
+# Design to Code
+
+Translate a Figma frame into the project's own UI components. Mapping, not
+freehand interpretation. The designer works in Figma with a shared shadcn/ui
+kit; you reuse the project's primitives and tokens so output looks hand-written.
+
+## Handoff inputs (usually a GitHub Issue)
+
+- Frame export PNG (primary — read it directly).
+- Figma frame link (reference).
+- Intent note naming kit components, variants, and interactions.
+- Target feature location.
+
+Free Figma: no Dev Mode MCP, no Variables API. Work from the image and the
+shared kit vocabulary. A Figma REST token, if the project documents one, is an
+optional precision pass for exact measurements — never required.
+
+## Process
+
+1. Read the project's tokens (`globals.css` / CSS variables) and primitive kit
+   (`src/shared/components/ui/`) before writing anything.
+2. Decompose the frame into kit primitives + feature composition.
+3. Map every visual to a token — never hardcode a color, radius, or font a
+   token covers.
+4. Reuse primitives before creating. A missing primitive is scaffolded from
+   shadcn/ui wired to existing tokens, then reported as added.
+5. Compose feature components matching existing conventions (CVA, `cn`).
+6. Verify: `tsc --noEmit`, lint, run.
+
+## Constraints
+
+- No invented tokens or parallel design language.
+- When the design contradicts the kit, surface the gap — do not guess.
+- Respect SPEC rules (R1.1 ≤300 lines, R1.4 strict TS, R3.5 no push without
+  confirmation, R1.2 never read `.env`).
+
+If native sub-agents are unavailable, run this role from
+`.claude/sub-agents/design-to-code-agent.md`.

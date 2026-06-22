@@ -4,7 +4,7 @@
       "command": "npx",
       "args": ["-y", "@supabase/mcp-server-supabase@latest"],
       "env": {
-        "SUPABASE_ACCESS_TOKEN": "${SUPABASE_ACCESS_TOKEN}"
+        "SUPABASE_ACCESS_TOKEN": "${env:SUPABASE_ACCESS_TOKEN}"
       }
     },
     "playwright": {
@@ -12,7 +12,6 @@
       "args": ["@playwright/mcp@latest", "--viewport-size=1280x720"]
     },
     "posthog": {
-      "type": "http",
       "url": "https://mcp.posthog.com/mcp"
     }
   }
