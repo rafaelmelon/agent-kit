@@ -10,9 +10,12 @@ truth.
 |------|---------|
 | `.cursor/rules/00-core.mdc` | Always-on pointer to the neutral toolkit contract |
 | `.cursor/rules/10-workflow.mdc` | Agent-requested workflow guidance |
+| `.cursor/rules/20-design.mdc` | Design-to-code guidance |
+| `.cursor/rules/30-guardrails.mdc` | Always-on guardrails (SPEC R8–R10) |
 | `.cursor/commands/plan-issue.md` | Cursor slash command for issue planning |
 | `.cursor/commands/update-spec.md` | Cursor slash command for spec sync |
 | `.cursor/commands/review-pr.md` | Cursor slash command for PR review |
+| `.cursor/commands/fix-review.md` | Cursor slash command to close a review round |
 | `.cursor/mcp.json` | Cursor MCP server config |
 
 ## Workspace Setup
@@ -39,6 +42,7 @@ Cursor discovers custom commands from `.cursor/commands`. Use:
 /plan-issue 42
 /update-spec
 /review-pr 15
+/fix-review 15
 ```
 
 If Cursor does not show a command, ask it to run the equivalent workflow from

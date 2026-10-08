@@ -14,6 +14,7 @@ When working with Codex:
    - `plan-issue <number>`
    - `update-spec`
    - `review-pr <number>`
+   - `fix-review <number>`
 4. Keep project-specific knowledge in the project repo, not in this toolkit.
 
 ## Codex Behavior Contract
@@ -49,6 +50,16 @@ Run the rafaelmelon-ai review-pr workflow for PR 15.
 Review against the linked issue acceptance criteria, project spec, and SPEC.md.
 Lead with findings and include file/line references.
 ```
+
+```text
+Run the rafaelmelon-ai fix-review workflow for PR 15.
+Fix only the items the last review raised, propose follow-up issues for
+anything new, and show every reply before posting it.
+```
+
+Role definitions (PM, Plan, Build, Validation, Review, Spec Divergence) live in
+`.claude/agents/*.md` and test guidance in `.claude/skills/test-rules/SKILL.md`.
+They are plain Markdown; read them directly.
 
 ## Keeping Codex Portable
 

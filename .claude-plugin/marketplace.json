@@ -1,0 +1,15 @@
+{
+  "name": "rafaelmelon",
+  "description": "Rafael Melón's personal Claude Code plugins.",
+  "owner": {
+    "name": "Rafael Melón",
+    "url": "https://github.com/rafaelmelon"
+  },
+  "plugins": [
+    {
+      "name": "rafaelmelon-ai",
+      "source": "./",
+      "description": "Personal AI workflow toolkit: commands, agents, skills and secret-protection hook."
+    }
+  ]
+}

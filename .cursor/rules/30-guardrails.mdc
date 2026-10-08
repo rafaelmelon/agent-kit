@@ -1,0 +1,26 @@
+---
+description: Always-on agent guardrails from SPEC.md R8–R10 (bug fixes, branches, merges, tests, migrations, communication).
+alwaysApply: true
+---
+
+# Guardrails
+
+The full rules are in `SPEC.md` R8 (agent guardrails), R9 (database
+migrations) and R10 (communication). The short version:
+
+- **Bug fixes are surgical.** Root cause first, align with an existing
+  pattern, ~4 production files at most without asking, no refactors in the
+  same change, and a test that fails without the fix.
+- **One task, one branch.** Use a git worktree when other work is in progress.
+  Never touch another agent's branch, worktree or uncommitted changes.
+- **Never merge.** Create the PR, return its URL, and wait.
+- **No scratch files in the repo.**
+- **Tests prove behavior at the right layer.** See
+  `.claude/skills/test-rules/SKILL.md`.
+- **Migrations:** reuse before migrating, classify LOW/MEDIUM/HIGH, HIGH needs
+  approval, stay backward compatible, RLS on every new table, never push to a
+  remote database without confirmation.
+- **Reviews are independent.** Review from a fresh chat, and try to refute
+  each blocking finding before reporting it.
+- **Write for a non-engineer first:** outcome first, terms explained,
+  clickable links.

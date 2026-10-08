@@ -32,7 +32,7 @@ Project-specific knowledge lives in each project repo (`docs/`, `SPEC.md`,
 ```text
 rafaelmelon-ai/
 ├── AGENTS.md               # Provider-neutral identity and operating contract
-├── SPEC.md                 # Canonical rules (R1-Rn)
+├── SPEC.md                 # Canonical rules (R1-R10)
 ├── CLAUDE.md               # Claude Code compatibility shim
 ├── CONTRIBUTING.md         # Human governance and git workflow
 ├── .mcp.json               # Shared MCP config for tools that support it
@@ -42,13 +42,17 @@ rafaelmelon-ai/
 │   ├── rules/              # Cursor project rules (.mdc)
 │   └── mcp.json            # Cursor MCP configuration
 │
-├── .claude/                # Claude Code adapter
+├── .claude/                # Claude Code adapter (shared Markdown)
 │   ├── commands/           # Claude slash commands
-│   ├── skills/             # Claude-compatible skill definitions
-│   └── sub-agents/         # Claude-oriented role templates
+│   ├── skills/             # Skills (YAML frontmatter + SKILL.md)
+│   └── agents/             # Agent roles (YAML frontmatter)
+│
+├── .claude-plugin/         # Claude Code plugin + marketplace manifest
+├── hooks/                  # Plugin hooks (secret protection) and tests
 │
 └── docs/
     ├── adapters.md         # How to add or maintain adapters
+    ├── claude-code.md      # Claude Code setup (plugin + global rules)
     ├── codex.md            # Codex-specific setup
     ├── cursor.md           # Cursor-specific setup
     └── workflow.md         # Standard development workflow
@@ -64,7 +68,7 @@ rafaelmelon-ai/
 | Shared MCP config | `.mcp.json` |
 | Codex guidance | `AGENTS.md` and `docs/codex.md` |
 | Cursor adapter | `.cursor/` |
-| Claude Code adapter | `.claude/` and `CLAUDE.md` |
+| Claude Code adapter | `.claude/`, `.claude-plugin/`, `hooks/`, and `docs/claude-code.md` |
 | Project knowledge | Each project's `AGENTS.md`, `docs/`, or `SPEC.md` |
 | Planning and tasks | GitHub Issues in each project repo |
 
@@ -80,8 +84,10 @@ See `docs/cursor.md`.
 For Codex, use `AGENTS.md` as the primary contract and see `docs/codex.md` for
 workflow prompts that do not depend on slash commands.
 
-For Claude Code, keep `CLAUDE.md` as a small compatibility shim and keep the
-Claude-specific command, skill, and sub-agent files under `.claude/`.
+For Claude Code, install this repo as a plugin and load `SPEC.md` from
+`~/.claude/CLAUDE.md` (see `docs/claude-code.md`). Keep `CLAUDE.md` as a small
+compatibility shim for sessions opened inside this repo, and keep commands,
+skills, and agents under `.claude/`.
 
 For other AI tools, start from `AGENTS.md`, `SPEC.md`, and `docs/workflow.md`,
 then add the smallest possible adapter for that tool's native format.
@@ -94,8 +100,10 @@ then add the smallest possible adapter for that tool's native format.
 - New Cursor command: `.cursor/commands/<name>.md`.
 - New Cursor rule: `.cursor/rules/<name>.mdc`.
 - New Claude command: `.claude/commands/<name>.md`.
-- New Claude skill: `.claude/skills/<name>/SKILL.md`.
-- New Claude sub-agent: `.claude/sub-agents/<name>.md`.
+- New Claude skill: `.claude/skills/<name>/SKILL.md`, with `name` and
+  `description` frontmatter.
+- New Claude agent: `.claude/agents/<name>.md`, with `name` and `description`
+  frontmatter, and listed in `.claude-plugin/plugin.json`.
 
 ## Document Precedence
 

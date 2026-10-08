@@ -40,4 +40,4 @@ optional precision pass for exact measurements — never required.
   confirmation, R1.2 never read `.env`).
 
 If native sub-agents are unavailable, run this role from
-`.claude/sub-agents/design-to-code-agent.md`.
+`.claude/agents/design-to-code-agent.md`.

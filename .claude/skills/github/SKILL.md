@@ -1,3 +1,8 @@
+---
+name: github
+description: Read and write GitHub Issues, pull requests, reviews, Actions runs and releases with the gh CLI. Use when a workflow needs issue or PR data, posts a comment or review, or checks CI.
+---
+
 # Skill: GitHub
 
 Access GitHub Issues, Pull Requests, Actions, and releases using the `gh` CLI.

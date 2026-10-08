@@ -67,13 +67,15 @@ neutral contract.
 - **Codex**: use `AGENTS.md` as the primary contract. See `docs/codex.md`.
 - **Cursor**: use `.cursor/rules`, `.cursor/commands`, and `.cursor/mcp.json`.
   See `docs/cursor.md`.
-- **Claude Code**: use `CLAUDE.md` plus `.claude/commands`, `.claude/skills`,
-  and `.claude/sub-agents`.
+- **Claude Code**: install as a plugin and load `SPEC.md` globally. See
+  [docs/claude-code.md](docs/claude-code.md).
 
 ### 3. Workflow
 
 ```text
-GitHub Issue -> /plan-issue <number> -> implement -> /update-spec
+GitHub Issue -> /plan-issue <number> -> build -> validation-agent
+  -> PR -> /review-pr <number> (fresh session) -> /fix-review <number>
+  -> /update-spec
 ```
 
 See [docs/workflow.md](docs/workflow.md) for the full guide.
@@ -83,10 +85,17 @@ See [docs/workflow.md](docs/workflow.md) for the full guide.
 ```text
 rafaelmelon-ai/
 ├── AGENTS.md               # Provider-neutral agent instructions
-├── SPEC.md                 # Canonical rules (R1-R7)
+├── SPEC.md                 # Canonical rules (R1-R10)
 ├── CLAUDE.md               # Claude Code compatibility shim
 ├── CONTRIBUTING.md         # Conventions for this repo
 ├── .mcp.json               # Shared MCP config
+├── .claude-plugin/
+│   ├── plugin.json         # Claude Code plugin manifest
+│   └── marketplace.json    # Lets /plugin install it from this repo
+├── hooks/
+│   ├── hooks.json          # Plugin hooks
+│   ├── block-env-access.mjs  # Hook entry: keeps agents away from .env
+│   └── env-guard.mjs       # Guard logic (tested in env-guard.test.mjs)
 ├── .cursor/
 │   ├── commands/           # Cursor custom commands
 │   ├── rules/              # Cursor project rules
@@ -95,20 +104,25 @@ rafaelmelon-ai/
 │   ├── commands/
 │   │   ├── plan-issue.md   # Plan from a GitHub Issue
 │   │   ├── update-spec.md  # Sync project spec after a feature
-│   │   └── review-pr.md    # Review a PR
+│   │   ├── review-pr.md    # Review a PR, verifying findings
+│   │   └── fix-review.md   # Close one review round
 │   ├── skills/
 │   │   ├── github/         # GitHub Issues, PRs, Actions
 │   │   ├── vercel/         # Deploy, logs, env vars
-│   │   ├── supabase/       # Database, migrations, auth
-│   │   └── browser-automation/  # Playwright
-│   └── sub-agents/
+│   │   ├── supabase/       # Database, migrations, RLS, auth
+│   │   ├── browser-automation/  # Playwright
+│   │   └── test-rules/     # Which test, at which layer
+│   └── agents/
 │       ├── pm-agent.md
 │       ├── plan-agent.md
 │       ├── build-agent.md
+│       ├── validation-agent.md
 │       ├── review-agent.md
-│       └── spec-divergence-agent.md
+│       ├── spec-divergence-agent.md
+│       └── design-to-code-agent.md
 └── docs/
     ├── adapters.md
+    ├── claude-code.md
     ├── codex.md
     ├── cursor.md
     └── workflow.md
@@ -125,7 +139,7 @@ rafaelmelon-ai/
 | New Cursor rule | `.cursor/rules/<name>.mdc` |
 | New Claude command | `.claude/commands/<name>.md` |
 | New Claude skill | `.claude/skills/<name>/SKILL.md` |
-| New Claude sub-agent | `.claude/sub-agents/<name>.md` |
+| New Claude agent | `.claude/agents/<name>.md` + entry in `.claude-plugin/plugin.json` |
 
 Keep adapter files thin. The workflow should remain understandable to an AI
 agent that only reads Markdown.
