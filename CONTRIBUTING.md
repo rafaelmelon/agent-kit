@@ -9,17 +9,28 @@ This document covers conventions for working in this tooling repo itself. For pr
    - Cursor: `.cursor/commands/<name>.md`
    - Claude Code: `.claude/commands/<name>.md`
 3. Follow the format: title, usage, steps, output, next step.
-4. Reference the role it invokes: PM, Plan, Build, Review, or Spec Divergence.
+4. Reference the role it invokes: PM, Plan, Build, Validation, Review, or Spec Divergence.
+5. Claude commands start with `description` and `argument-hint` frontmatter and
+   reference `$ARGUMENTS`.
 
 ## Adding a new skill
 
 1. Create `.claude/skills/<name>/SKILL.md`
-2. Include: description, when to use, prerequisites, key operations, examples
+2. Start it with YAML frontmatter: `name` and a `description` that says when to
+   use it. Claude Code ignores a skill without them.
+3. Include: when to use, prerequisites, key operations, examples
 
-## Adding a new sub-agent
+## Adding a new agent
 
-1. Create `.claude/sub-agents/<name>.md`
-2. Define: role, responsibilities, inputs, outputs, constraints
+1. Create `.claude/agents/<name>.md`
+2. Start it with YAML frontmatter: `name`, `description` (when to delegate),
+   and optionally `tools`
+3. Define: role, responsibilities, inputs, outputs, constraints
+4. List the file under `agents` in `.claude-plugin/plugin.json`
+
+## Changing the hook
+
+Run `node --test 'hooks/*.test.mjs'` before committing.
 
 ## Adding a new adapter
 

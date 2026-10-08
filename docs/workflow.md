@@ -1,6 +1,6 @@
 # Workflow Guide
 
-How to use rafaelmelon-ai when working on a personal project with Codex,
+How to use agent-kit when working on a personal project with Codex,
 Cursor, Claude Code, or another AI coding agent.
 
 ## Setup
@@ -11,7 +11,7 @@ Add this repo to your workspace alongside project repos:
 // rafaelmelon.code-workspace
 {
   "folders": [
-    { "path": "rafaelmelon-ai" },
+    { "path": "agent-kit" },
     { "path": "movie-recommender" }
   ]
 }
@@ -27,7 +27,7 @@ same workflow for agents that support native commands, rules, or skills.
 |------|--------------------|----------------|
 | Codex | `AGENTS.md` | `docs/codex.md` |
 | Cursor | `AGENTS.md`, `.cursor/rules/*.mdc` | `.cursor/commands/`, `.cursor/mcp.json` |
-| Claude Code | `CLAUDE.md` -> `AGENTS.md` | `.claude/commands/`, `.claude/skills/`, `.claude/sub-agents/` |
+| Claude Code | `~/.claude/CLAUDE.md` -> `SPEC.md` | Plugin: `.claude/commands/`, `.claude/skills/`, `.claude/agents/`, `hooks/` (see `docs/claude-code.md`) |
 | Other agents | `AGENTS.md`, `SPEC.md`, `docs/workflow.md` | Add only if useful |
 
 ## Standard development cycle
@@ -64,17 +64,26 @@ After confirming the plan, create a branch and implement:
 git checkout -b feat/movie-add-watchlist
 ```
 
+When another agent or task is already running in the same repo, use a
+worktree instead of switching branches (`SPEC.md` R8.3):
+
+```bash
+git fetch --prune
+git worktree add ../movie-add-watchlist -b feat/movie-add-watchlist origin/main
+```
+
 The Build role follows the plan step by step. It will:
 - Read existing code before writing
-- Implement only what the plan specifies
-- Run type check and lint after finishing
+- Implement only what the plan specifies, including the planned tests
+- Run type check, lint and tests after finishing
 
-### 4. Update The Project Spec
+Bug fixes follow the surgical rules in `SPEC.md` R8.1–R8.2.
 
-Use `/update-spec` when available. Otherwise ask the agent to run the
-`update-spec` workflow manually.
+### 4. Validate
 
-This syncs the project's `docs/` or `SPEC.md` with what was actually built. **Always do this after merging a feature.**
+Run the Validation role (`validation-agent`) before opening the PR. It checks
+security, that every AC has a test at the right layer (`test-rules` skill),
+regression risk, performance, and migration safety.
 
 ### 5. Open a PR and review
 
@@ -82,11 +91,28 @@ This syncs the project's `docs/` or `SPEC.md` with what was actually built. **Al
 gh pr create --title "feat(movie): add watchlist" --body "Closes #42"
 ```
 
-Or ask your agent to review an existing PR:
+Review it from a **fresh session**, so the reviewer does not share the
+author's assumptions (`SPEC.md` R8.7):
 
 ```text
 /review-pr 15
 ```
+
+When the review asks for changes, close that round with:
+
+```text
+/fix-review 15
+```
+
+`/fix-review` fixes only what the round raised. Anything new becomes a
+follow-up issue.
+
+### 6. Update The Project Spec
+
+Use `/update-spec` when available. Otherwise ask the agent to run the
+`update-spec` workflow manually.
+
+This syncs the project's `docs/` or `SPEC.md` with what was actually built. **Always do this after merging a feature.**
 
 ## When to use each command
 
@@ -94,8 +120,10 @@ Or ask your agent to review an existing PR:
 |-----------|---------|
 | Starting a new feature or fix | Create a GitHub Issue, then `/plan-issue` or the equivalent prompt |
 | About to implement | Confirm the plan first |
+| Implementation done, before the PR | `validation-agent` |
+| Reviewing someone's PR (or your own) | `/review-pr <number>` in a fresh session |
+| Review asked for changes | `/fix-review <number>` |
 | After merging a feature | `/update-spec` or the equivalent prompt |
-| Reviewing someone's PR (or your own) | `/review-pr <number>` or the equivalent prompt |
 
 ## When to use each skill
 
@@ -105,6 +133,7 @@ Or ask your agent to review an existing PR:
 | Check deploy status or logs | `vercel` |
 | Query the database or run migrations | `supabase` |
 | Verify UI behavior end-to-end | `browser-automation` |
+| Decide which test a change needs | `test-rules` |
 
 ## Project spec conventions
 

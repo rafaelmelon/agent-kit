@@ -1,0 +1,23 @@
+{
+  "name": "agent-kit",
+  "displayName": "agent-kit",
+  "version": "0.2.0",
+  "description": "Personal AI workflow toolkit: issue-to-PR commands, PM/Plan/Build/Validation/Review agents, tooling skills, test rules, and a hook that keeps agents away from .env secrets.",
+  "author": {
+    "name": "Rafael Melón",
+    "url": "https://github.com/rafaelmelon"
+  },
+  "repository": "https://github.com/rafaelmelon/agent-kit",
+  "keywords": ["workflow", "agents", "nextjs", "supabase", "vercel"],
+  "commands": "./.claude/commands/",
+  "agents": [
+    "./.claude/agents/pm-agent.md",
+    "./.claude/agents/plan-agent.md",
+    "./.claude/agents/build-agent.md",
+    "./.claude/agents/validation-agent.md",
+    "./.claude/agents/review-agent.md",
+    "./.claude/agents/spec-divergence-agent.md",
+    "./.claude/agents/design-to-code-agent.md"
+  ],
+  "skills": "./.claude/skills/"
+}

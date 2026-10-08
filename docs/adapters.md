@@ -1,6 +1,6 @@
 # Adapter Guide
 
-Adapters translate the neutral rafaelmelon-ai workflow into tool-native formats.
+Adapters translate the neutral agent-kit workflow into tool-native formats.
 They should stay small, boring, and easy to compare.
 
 ## Core Principle
@@ -20,7 +20,7 @@ must not introduce a competing workflow.
 |------|---------------|---------|
 | Codex | `AGENTS.md`, `docs/codex.md` | Plain Markdown instructions and Codex workflow notes |
 | Cursor | `.cursor/rules/`, `.cursor/commands/`, `.cursor/mcp.json` | Native rules, commands, and MCP config |
-| Claude Code | `CLAUDE.md`, `.claude/` | Claude-native commands, skills, and sub-agent prompts |
+| Claude Code | `CLAUDE.md`, `.claude/`, `.claude-plugin/`, `hooks/` | Plugin with commands, skills, agents and hooks; global rules via `~/.claude/CLAUDE.md` (see `docs/claude-code.md`) |
 
 The root `.mcp.json` remains available for tools that support a shared MCP
 configuration. Cursor gets its own `.cursor/mcp.json` because Cursor expects

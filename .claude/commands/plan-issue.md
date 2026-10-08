@@ -1,6 +1,13 @@
+---
+description: Generate an implementation plan from a GitHub Issue, post it on the issue, and wait for confirmation before any code
+argument-hint: <issue-number> [owner/repo]
+---
+
 # /plan-issue
 
 Generate an implementation plan from a GitHub Issue.
+
+Arguments: $ARGUMENTS
 
 ## Usage
 

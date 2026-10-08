@@ -1,6 +1,13 @@
+---
+description: Sync the project spec with what was actually built after a feature or fix
+argument-hint: [feature-slug]
+---
+
 # /update-spec
 
 Sync the persistent spec for the current project after a completed feature or fix.
+
+Arguments: $ARGUMENTS
 
 This command is **mandatory** after every development cycle. The spec must reflect the current state of the project — not what was planned, but what was built.
 

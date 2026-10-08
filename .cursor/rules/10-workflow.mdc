@@ -10,6 +10,8 @@ Use the role that matches the work:
 - **PM**: clarify scope, acceptance criteria, and open questions.
 - **Plan**: create a minimal implementation plan from an issue or ACs.
 - **Build**: implement an approved plan step by step.
+- **Validation**: QA pass after Build and before review (security, AC test
+  coverage, regressions, performance, migration safety).
 - **Review**: review a PR against ACs, project spec, and code quality.
 - **Spec Divergence**: update a project spec after completed work.
 - **Design to Code**: translate a designer's Figma frame into the project's UI
@@ -22,7 +24,11 @@ Workflow commands:
 
 - `/plan-issue <number>`: plan from a GitHub Issue.
 - `/update-spec`: sync the project spec after completed work.
-- `/review-pr <number>`: review a PR against ACs and specs.
+- `/review-pr <number>`: review a PR against ACs and specs, from a fresh
+  session, verifying blocking findings.
+- `/fix-review <number>`: close one review round; new issues become
+  follow-ups.
 
 If native slash commands are unavailable, run the same workflows from
-`docs/workflow.md`.
+`docs/workflow.md`. Role definitions live in `.claude/agents/*.md` (plain
+Markdown, readable by Cursor).

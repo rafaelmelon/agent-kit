@@ -1,3 +1,8 @@
+---
+name: vercel
+description: Inspect Vercel deployments, build and runtime logs, and environment variables with the vercel CLI. Use when checking a deploy, reading production or preview logs, or debugging a failed build.
+---
+
 # Skill: Vercel
 
 Access Vercel deployments, logs, and environment variables using the `vercel` CLI.

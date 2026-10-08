@@ -1,3 +1,8 @@
+---
+name: browser-automation
+description: Drive a browser with Playwright to verify UI behavior end to end, explore a running app, or capture screenshots. Use after a UI change to confirm it works in the real app, never against production.
+---
+
 # Skill: Browser Automation
 
 Automate browser interactions using Playwright for UI testing, exploration, and verification.
