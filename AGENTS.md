@@ -1,4 +1,4 @@
-# rafaelmelon-ai
+# agent-kit
 
 ## What This Repository Is
 
@@ -30,7 +30,7 @@ Project-specific knowledge lives in each project repo (`docs/`, `SPEC.md`,
 ## Repository Structure
 
 ```text
-rafaelmelon-ai/
+agent-kit/
 ├── AGENTS.md               # Provider-neutral identity and operating contract
 ├── SPEC.md                 # Canonical rules (R1-R10)
 ├── CLAUDE.md               # Claude Code compatibility shim

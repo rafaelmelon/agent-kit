@@ -1,4 +1,4 @@
-# rafaelmelon-ai
+# agent-kit
 
 Personal AI tooling hub for coding agents across Rafael Melon's projects.
 
@@ -53,7 +53,7 @@ Tokens needed:
 // rafaelmelon.code-workspace
 {
   "folders": [
-    { "path": "rafaelmelon-ai" },
+    { "path": "agent-kit" },
     { "path": "movie-recommender" }
   ]
 }
@@ -83,7 +83,7 @@ See [docs/workflow.md](docs/workflow.md) for the full guide.
 ## Structure
 
 ```text
-rafaelmelon-ai/
+agent-kit/
 ├── AGENTS.md               # Provider-neutral agent instructions
 ├── SPEC.md                 # Canonical rules (R1-R10)
 ├── CLAUDE.md               # Claude Code compatibility shim

@@ -7,7 +7,7 @@
   },
   "plugins": [
     {
-      "name": "rafaelmelon-ai",
+      "name": "agent-kit",
       "source": "./",
       "description": "Personal AI workflow toolkit: commands, agents, skills and secret-protection hook."
     }

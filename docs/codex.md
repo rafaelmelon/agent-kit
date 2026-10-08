@@ -8,7 +8,7 @@ provider-neutral so Codex can use it as the primary project contract.
 When working with Codex:
 
 1. Open the project repo and this toolkit in the same workspace when possible.
-2. Ask Codex to read `rafaelmelon-ai/AGENTS.md`, `SPEC.md`, and
+2. Ask Codex to read `agent-kit/AGENTS.md`, `SPEC.md`, and
    `docs/workflow.md` before starting a workflow.
 3. Use workflow names directly when slash commands are not available:
    - `plan-issue <number>`
@@ -34,25 +34,25 @@ Codex should:
 If a Codex session cannot discover native slash commands, use direct prompts:
 
 ```text
-Run the rafaelmelon-ai plan-issue workflow for issue 42.
+Run the agent-kit plan-issue workflow for issue 42.
 Read AGENTS.md, SPEC.md, docs/workflow.md, and the project spec first.
 Post or draft the plan, then wait for confirmation before implementing.
 ```
 
 ```text
-Run the rafaelmelon-ai update-spec workflow.
+Run the agent-kit update-spec workflow.
 Compare the current project spec with the implementation diff and propose
 snapshot-style spec updates before applying them.
 ```
 
 ```text
-Run the rafaelmelon-ai review-pr workflow for PR 15.
+Run the agent-kit review-pr workflow for PR 15.
 Review against the linked issue acceptance criteria, project spec, and SPEC.md.
 Lead with findings and include file/line references.
 ```
 
 ```text
-Run the rafaelmelon-ai fix-review workflow for PR 15.
+Run the agent-kit fix-review workflow for PR 15.
 Fix only the items the last review raised, propose follow-up issues for
 anything new, and show every reply before posting it.
 ```

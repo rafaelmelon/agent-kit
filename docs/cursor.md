@@ -25,7 +25,7 @@ Add this repo alongside project repos in your Cursor workspace:
 ```json
 {
   "folders": [
-    { "path": "rafaelmelon-ai" },
+    { "path": "agent-kit" },
     { "path": "movie-recommender" }
   ]
 }

@@ -4,7 +4,7 @@ Claude Code uses this repo in two ways:
 
 | What | How it reaches every project |
 |------|------------------------------|
-| Commands, agents, skills, hooks | Installed as the `rafaelmelon-ai` plugin |
+| Commands, agents, skills, hooks | Installed as the `agent-kit` plugin |
 | Canonical rules (`SPEC.md`) | Imported from `~/.claude/CLAUDE.md` |
 
 A plugin cannot load a `CLAUDE.md`, so the always-on rules need the second
@@ -22,22 +22,22 @@ an agent is told to read it.
 Inside Claude Code:
 
 ```text
-/plugin marketplace add rafaelmelon/rafaelmelon-ai
-/plugin install rafaelmelon-ai@rafaelmelon
+/plugin marketplace add rafaelmelon/agent-kit
+/plugin install agent-kit@rafaelmelon
 ```
 
 To work on the toolkit itself and see edits without reinstalling, add the local
 clone instead. A marketplace added from a local path loads the plugin in place:
 
 ```text
-/plugin marketplace add ~/Dev/rafaelmelon-ai
-/plugin install rafaelmelon-ai@rafaelmelon
+/plugin marketplace add ~/Dev/agent-kit
+/plugin install agent-kit@rafaelmelon
 ```
 
 Check it from a terminal:
 
 ```bash
-claude plugin validate ~/Dev/rafaelmelon-ai
+claude plugin validate ~/Dev/agent-kit
 ```
 
 The validator warns that a `CLAUDE.md` at the plugin root is not loaded. That
@@ -50,13 +50,13 @@ Create or edit `~/.claude/CLAUDE.md`:
 ```markdown
 # Personal defaults
 
-@~/Dev/rafaelmelon-ai/SPEC.md
+@~/Dev/agent-kit/SPEC.md
 
 Project instructions (the project's own AGENTS.md / CLAUDE.md) win when they
 are more specific.
 ```
 
-Keep the clone at `~/Dev/rafaelmelon-ai` and pull it to update the rules.
+Keep the clone at `~/Dev/agent-kit` and pull it to update the rules.
 
 ## 3. Optional: deny `.env` at the permission level
 
@@ -87,7 +87,7 @@ read templates through the hook-approved paths instead.
 | Hook | `block-env-access` | Denies reads, edits and shell commands that touch `.env` files |
 
 Plugin components are namespaced: when a name clashes, use
-`/rafaelmelon-ai:review-pr` or the agent `rafaelmelon-ai:review-agent`.
+`/agent-kit:review-pr` or the agent `agent-kit:review-agent`.
 
 Inside this repo the same commands also load as project files, so you may see
 each one twice. Either is fine.

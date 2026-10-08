@@ -2,7 +2,7 @@
 import { decide } from "./env-guard.mjs";
 
 const REASON =
-  "Blocked by rafaelmelon-ai: .env files hold secrets and are off limits (SPEC.md R1.2, R6.1). " +
+  "Blocked by agent-kit: .env files hold secrets and are off limits (SPEC.md R1.2, R6.1). " +
   "Reference variables by name ($VAR) and read .env.example for the list. " +
   "To read a JSON field named env with jq, write .[\"env\"] instead of .env.";
 

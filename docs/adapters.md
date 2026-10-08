@@ -1,6 +1,6 @@
 # Adapter Guide
 
-Adapters translate the neutral rafaelmelon-ai workflow into tool-native formats.
+Adapters translate the neutral agent-kit workflow into tool-native formats.
 They should stay small, boring, and easy to compare.
 
 ## Core Principle

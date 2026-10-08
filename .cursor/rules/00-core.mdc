@@ -1,9 +1,9 @@
 ---
-description: Always apply the rafaelmelon-ai neutral toolkit contract.
+description: Always apply the agent-kit neutral toolkit contract.
 alwaysApply: true
 ---
 
-# rafaelmelon-ai Core Contract
+# agent-kit Core Contract
 
 This repo is a provider-neutral AI tooling hub. Use it as workflow guidance for
 personal projects, not as project-specific product knowledge.

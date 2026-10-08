@@ -1,6 +1,6 @@
 # Workflow Guide
 
-How to use rafaelmelon-ai when working on a personal project with Codex,
+How to use agent-kit when working on a personal project with Codex,
 Cursor, Claude Code, or another AI coding agent.
 
 ## Setup
@@ -11,7 +11,7 @@ Add this repo to your workspace alongside project repos:
 // rafaelmelon.code-workspace
 {
   "folders": [
-    { "path": "rafaelmelon-ai" },
+    { "path": "agent-kit" },
     { "path": "movie-recommender" }
   ]
 }
