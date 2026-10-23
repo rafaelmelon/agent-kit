@@ -116,3 +116,13 @@ more specific instruction.
 | R10.2 | Explain each technical term or acronym on first use, or drop it. Prefer numbers and concrete examples over vague wording. |
 | R10.3 | Every reference is clickable: full URL for PRs, issues, CI runs and deployments; relative path links for files. |
 | R10.4 | Reply in the language the user writes in; code, commits and repository docs stay in English. |
+
+## R11 — Session continuity
+
+| ID | Rule |
+|----|------|
+| R11.1 | Each project keeps its working state in `.agent/handoff.md`. It is local and never committed (the plugin's SessionStart hook adds `.agent/` to `.git/info/exclude`), so it may hold private details, and it is never copied into issues, PRs or commits. |
+| R11.2 | Fixed shape, one screen: `# Handoff`, then `## State` (what is true now), `## Next` (numbered, in order), `## Decisions` (settled, dated, not to be reopened) and `## Resume` (the first file, command or question). A snapshot, not a log: rewrite it, never append history. |
+| R11.3 | The agent reads it when a session starts (the hook injects it; other tools read it first) and updates it without being asked: when a task closes, when a decision is made, and before a session ends or is compacted. `/handoff` rewrites it on demand. |
+| R11.4 | One session per workstream. When the work changes subject (another repository, another system), say so and suggest a new session that starts from the handoff. |
+| R11.5 | Headings stay in English; the content is in the user's language. |

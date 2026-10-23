@@ -95,7 +95,9 @@ agent-kit/
 ├── hooks/
 │   ├── hooks.json          # Plugin hooks
 │   ├── block-env-access.mjs  # Hook entry: keeps agents away from .env
-│   └── env-guard.mjs       # Guard logic (tested in env-guard.test.mjs)
+│   ├── env-guard.mjs       # Guard logic (tested in env-guard.test.mjs)
+│   ├── load-handoff.mjs    # Hook entry: starts each session from .agent/handoff.md
+│   └── handoff.mjs         # Handoff logic (tested in handoff.test.mjs)
 ├── .cursor/
 │   ├── commands/           # Cursor custom commands
 │   ├── rules/              # Cursor project rules
