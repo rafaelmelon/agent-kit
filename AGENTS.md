@@ -48,7 +48,7 @@ agent-kit/
 │   └── agents/             # Agent roles (YAML frontmatter)
 │
 ├── .claude-plugin/         # Claude Code plugin + marketplace manifest
-├── hooks/                  # Plugin hooks (secret protection) and tests
+├── hooks/                  # Plugin hooks (secret protection, session handoff) and tests
 │
 └── docs/
     ├── adapters.md         # How to add or maintain adapters
@@ -91,6 +91,10 @@ skills, and agents under `.claude/`.
 
 For other AI tools, start from `AGENTS.md`, `SPEC.md`, and `docs/workflow.md`,
 then add the smallest possible adapter for that tool's native format.
+
+In any project, any tool: if `.agent/handoff.md` exists, read it before
+anything else and keep it current (SPEC.md R11). Claude Code is handed it by a
+hook; every other agent opens it itself.
 
 ## Adding New Tools
 

@@ -82,9 +82,11 @@ read templates through the hook-approved paths instead.
 | Command | `/review-pr <n>` | Independent PR review with verified findings |
 | Command | `/fix-review <n>` | Close one review round |
 | Command | `/update-spec` | Sync the project spec after a feature |
+| Command | `/handoff` | Rewrite the project's session handoff (SPEC R11) |
 | Agent | `pm-agent`, `plan-agent`, `build-agent`, `validation-agent`, `review-agent`, `spec-divergence-agent`, `design-to-code-agent` | Workflow roles |
 | Skill | `github`, `vercel`, `supabase`, `browser-automation`, `test-rules` | Tooling and test guidance |
 | Hook | `block-env-access` | Denies reads, edits and shell commands that touch `.env` files |
+| Hook | `load-handoff` | At session start, hands the session `.agent/handoff.md` and keeps `.agent/` out of git (SPEC R11) |
 
 Plugin components are namespaced: when a name clashes, use
 `/agent-kit:review-pr` or the agent `agent-kit:review-agent`.

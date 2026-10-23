@@ -114,6 +114,22 @@ Use `/update-spec` when available. Otherwise ask the agent to run the
 
 This syncs the project's `docs/` or `SPEC.md` with what was actually built. **Always do this after merging a feature.**
 
+## Session continuity
+
+A long session gets summarised and loses detail, and a new one starts knowing
+nothing. So every project keeps one short file, `.agent/handoff.md` (SPEC.md
+R11): what is true now, what comes next in order, what was decided and must not
+be reopened, and where to resume. It is local and never committed, which is why
+it can name real people, accounts and folders that a repository must not.
+
+- **Claude Code** reads it by itself: the plugin's SessionStart hook hands it to
+  every new session and adds `.agent/` to `.git/info/exclude` the first time.
+- **Cursor and Codex** read it first, as the core rule and `AGENTS.md` say.
+- The agent rewrites it when a task closes or a decision is made, and `/handoff`
+  does it on demand. It is a snapshot under one screen, never a log.
+- One session per workstream: when the subject changes, start a new session and
+  let it begin from the handoff.
+
 ## When to use each command
 
 | Situation | Command |
@@ -124,6 +140,7 @@ This syncs the project's `docs/` or `SPEC.md` with what was actually built. **Al
 | Reviewing someone's PR (or your own) | `/review-pr <number>` in a fresh session |
 | Review asked for changes | `/fix-review <number>` |
 | After merging a feature | `/update-spec` or the equivalent prompt |
+| A task closed, a decision was made, or the session is ending | `/handoff` (the agent also does it unasked) |
 
 ## When to use each skill
 

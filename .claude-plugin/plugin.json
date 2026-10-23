@@ -1,8 +1,8 @@
 {
   "name": "agent-kit",
   "displayName": "agent-kit",
-  "version": "0.2.0",
-  "description": "Personal AI workflow toolkit: issue-to-PR commands, PM/Plan/Build/Validation/Review agents, tooling skills, test rules, and a hook that keeps agents away from .env secrets.",
+  "version": "0.3.0",
+  "description": "Personal AI workflow toolkit: issue-to-PR commands, PM/Plan/Build/Validation/Review agents, tooling skills, test rules, a hook that keeps agents away from .env secrets, and a session handoff every project resumes from.",
   "author": {
     "name": "Rafael Melón",
     "url": "https://github.com/rafaelmelon"
