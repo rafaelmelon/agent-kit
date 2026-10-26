@@ -19,6 +19,58 @@ It provides:
 Project knowledge (specs, docs, architecture decisions) lives in each project
 repo.
 
+## How it works
+
+An idea becomes a merged, documented change through small steps. Agents do the
+typing, and a human signs off the three decisions that matter: the plan, risky
+changes such as migrations, and the merge.
+
+```mermaid
+flowchart LR
+    I[GitHub Issue] --> P["/plan-issue<br>plan-agent"]
+    P --> G1{{You approve the plan}}
+    G1 --> B["build-agent<br>branch, tests, type check, lint"]
+    B --> V["validation-agent<br>pass / warn / fail"]
+    V --> R["/review-pr<br>review-agent, fresh session"]
+    R --> F["/fix-review"]
+    F --> G2{{You merge}}
+    G2 --> U["/update-spec<br>spec matches the code"]
+```
+
+An example session (illustrative, with a made-up project):
+
+```text
+you    > create issue #42: "Add a watchlist to the movie app"
+you    > /plan-issue 42
+agent  > Minimal plan: 1 migration, 1 API route, 1 component.
+         One test per acceptance criterion (AC-MOVIE-001..003). Posted on #42.
+you    > Approved.
+agent  > Branch feat/movie-add-watchlist. 3 commits. tsc, lint, tests: green.
+         validation-agent: pass, 1 warning (no index on watchlist.user_id).
+you    > (new session) /review-pr 57
+agent  > 1 blocking finding, verified by trying to refute it. 2 suggestions.
+you    > /fix-review 57
+you    > merge
+you    > /update-spec
+```
+
+## What it is not
+
+- **Not an app or a framework.** There is nothing to run or deploy: it is
+  Markdown, a few hooks and some config that agents read.
+- **Not an autonomous agent.** It automates the typing, not the decisions. The
+  plan, risky migrations and every merge need a human.
+- **Not tied to one tool.** `AGENTS.md`, `SPEC.md` and `docs/` are plain
+  Markdown. Claude Code, Cursor and Codex adapters are thin translations of the
+  same workflow.
+- **Not memory in the chat.** State lives in the repo: the spec in files, the
+  plan in the issue, the progress in the git branch, and the next step in
+  `.agent/handoff.md`. Any tool can pick up where another stopped.
+- **Not neutral about stack.** `SPEC.md` is opinionated (Next.js, Supabase,
+  Vercel). Fork it and change the rules to fit your own projects.
+- **Not a replacement for review.** The review agent works in a fresh session
+  and has to verify each blocking finding, but a human still reads the PR.
+
 ## Setup
 
 ### 0. Environment Variables
