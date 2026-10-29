@@ -10,6 +10,6 @@ state, so a new session can resume without this conversation (SPEC.md R11).
 ```
 
 Follow `.claude/commands/handoff.md`: same shape (State, Next, Decisions,
-Resume), a snapshot under 120 lines, `.agent/` kept out of git through
+Resume), with a "tried X, rejected because Y" line for every dead end (SPEC.md R11.6), a snapshot under 120 lines, `.agent/` kept out of git through
 `.git/info/exclude`. Cursor has no session hook, so read `.agent/handoff.md`
 first when a chat starts in a project that has one.

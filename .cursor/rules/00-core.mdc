@@ -25,4 +25,4 @@ Core behavior:
 - Never commit secrets or credentials.
 - Never push, merge, close PRs, or deploy without explicit user confirmation.
 - After implementation, run type check, lint, and tests when available.
-- Resume from `.agent/handoff.md` when the project has one, and keep it current (SPEC.md R11). It is local: never commit it or copy it into issues or PRs.
+- Resume from `.agent/handoff.md` when the project has one, and keep it current (SPEC.md R11), including a "tried X, rejected because Y" line for every dead end (R11.6). It is local: never commit it or copy it into issues or PRs.

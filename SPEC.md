@@ -126,3 +126,4 @@ more specific instruction.
 | R11.3 | The agent reads it when a session starts (the hook injects it; other tools read it first) and updates it without being asked: when a task closes, when a decision is made, and before a session ends or is compacted. `/handoff` rewrites it on demand. |
 | R11.4 | One session per workstream. When the work changes subject (another repository, another system), say so and suggest a new session that starts from the handoff. |
 | R11.5 | Headings stay in English; the content is in the user's language. |
+| R11.6 | `## Decisions` also records what was tried and rejected: `- YYYY-MM-DD: tried X, rejected because Y.` The branch shows what changed; this is the only place the why survives. Before closing a task or ending a session, the agent checks that every dead end of that work is written down. |

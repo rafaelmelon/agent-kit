@@ -32,7 +32,7 @@ Project-specific knowledge lives in each project repo (`docs/`, `SPEC.md`,
 ```text
 agent-kit/
 ├── AGENTS.md               # Provider-neutral identity and operating contract
-├── SPEC.md                 # Canonical rules (R1-R10)
+├── SPEC.md                 # Canonical rules (R1-R11)
 ├── CLAUDE.md               # Claude Code compatibility shim
 ├── CONTRIBUTING.md         # Human governance and git workflow
 ├── .mcp.json               # Shared MCP config for tools that support it
@@ -93,7 +93,8 @@ For other AI tools, start from `AGENTS.md`, `SPEC.md`, and `docs/workflow.md`,
 then add the smallest possible adapter for that tool's native format.
 
 In any project, any tool: if `.agent/handoff.md` exists, read it before
-anything else and keep it current (SPEC.md R11). Claude Code is handed it by a
+anything else and keep it current (SPEC.md R11), including what was tried and rejected, and why
+(R11.6). Claude Code is handed it by a
 hook; every other agent opens it itself.
 
 ## Adding New Tools

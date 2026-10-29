@@ -22,13 +22,17 @@ from it without this conversation (SPEC.md R11).
 
    ## Decisions
    - YYYY-MM-DD: what was settled, in one line. Not to be reopened.
+   - YYYY-MM-DD: tried X, rejected because Y. (dead ends, so nobody repeats them)
 
    ## Resume
    The first file to read, command to run or question to ask.
    ```
 
-3. Keep it under one screen (120 lines at most). Drop what is done and no longer
+3. While rewriting, list the options this session tried and dropped and make
+   sure each has a "tried X, rejected because Y" line (SPEC.md R11.6). Ask the
+   user if the reason is not clear from the conversation.
+4. Keep it under one screen (120 lines at most). Drop what is done and no longer
    explains anything; keep decisions while they still constrain the work.
-4. Make sure `.agent/` is ignored by git (`git check-ignore .agent/handoff.md`);
+5. Make sure `.agent/` is ignored by git (`git check-ignore .agent/handoff.md`);
    if not, add `.agent/` to `.git/info/exclude`, never to `.gitignore`.
-5. Answer with the `## Next` list only.
+6. Answer with the `## Next` list only.
