@@ -125,10 +125,19 @@ it can name real people, accounts and folders that a repository must not.
 - **Claude Code** reads it by itself: the plugin's SessionStart hook hands it to
   every new session and adds `.agent/` to `.git/info/exclude` the first time.
 - **Cursor and Codex** read it first, as the core rule and `AGENTS.md` say.
+- Decisions include the dead ends: `tried X, rejected because Y`, one dated line
+  each (R11.6). The branch shows what changed; this line is the why, so the next
+  agent does not reopen a question that was already answered.
 - The agent rewrites it when a task closes or a decision is made, and `/handoff`
   does it on demand. It is a snapshot under one screen, never a log.
 - One session per workstream: when the subject changes, start a new session and
   let it begin from the handoff.
+
+**Limits.** It is a file, so it relies on the agent writing to it: `/handoff`
+and the close-of-task check in R11.6 are the safeguards, not a guarantee. It is
+per project and per machine, not a live channel between agents running at the
+same time. For live messaging or shared task state, a tool built for that (an
+MCP server such as Concord) can sit alongside it.
 
 ## When to use each command
 

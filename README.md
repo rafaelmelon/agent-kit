@@ -10,7 +10,7 @@ support native rule or command formats.
 
 It provides:
 
-- **Slash commands**: `/plan-issue`, `/update-spec`, `/review-pr`
+- **Slash commands**: `/plan-issue`, `/review-pr`, `/fix-review`, `/update-spec`, `/handoff`
 - **Tooling skills**: GitHub, Vercel, Supabase, browser automation
 - **Agent roles**: PM, Plan, Build, Review, Spec Divergence
 - **Canonical rules**: shared conventions applied across projects
@@ -70,6 +70,15 @@ you    > /update-spec
   Vercel). Fork it and change the rules to fit your own projects.
 - **Not a replacement for review.** The review agent works in a fresh session
   and has to verify each blocking finding, but a human still reads the PR.
+
+## Session handoff
+
+Each project keeps `.agent/handoff.md`: what is true now, what comes next, what
+was decided, and what was tried and rejected (with one line of why). A new
+session, in any tool, starts from it instead of from a chat that is gone. It is
+local and never committed, so it can hold private details. Chat is disposable;
+the repo holds the spec and plan, the branch holds the what, and this file holds
+the why. Limits are listed in [docs/workflow.md](docs/workflow.md#session-continuity).
 
 ## Setup
 
@@ -137,7 +146,7 @@ See [docs/workflow.md](docs/workflow.md) for the full guide.
 ```text
 agent-kit/
 ├── AGENTS.md               # Provider-neutral agent instructions
-├── SPEC.md                 # Canonical rules (R1-R10)
+├── SPEC.md                 # Canonical rules (R1-R11)
 ├── CLAUDE.md               # Claude Code compatibility shim
 ├── CONTRIBUTING.md         # Conventions for this repo
 ├── .mcp.json               # Shared MCP config
